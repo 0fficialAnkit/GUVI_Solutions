@@ -1,0 +1,267 @@
+1
+
+
+#include <stdio.h>
+int main() {
+    int int1, int2;
+    float float_num;
+    scanf("%d", &int1);
+    scanf("%d", &int2);
+    scanf("%f", &float_num);
+    int bitwise_result = (int1 & int2) | (int1 ^ int2);
+    float arithmetic_result = int1 * float_num + int2 / float_num;
+    printf("%d\n", bitwise_result);
+    printf("%.4f\n", arithmetic_result);
+
+    return 0;
+}
+
+
+2
+
+#include <stdio.h>
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n < 6) {
+        printf("Error: Not enough inputs.\n");
+        return 1;  // Exit with error code
+    }
+    int x[6];
+    for (int i = 0; i < 6; i++) {
+        scanf("%d", &x[i]);
+    }
+    int result = (((x[0] + x[1]) - x[2]) * x[3] / x[4]) % x[5];
+    printf("%d\n", result);
+
+    return 0;
+}
+
+
+5
+
+#include <stdio.h>
+
+int main() {
+    int num;
+    unsigned long long factorial = 1;
+    scanf("%d", &num);
+    if (num < 0) {
+        goto error;
+    }
+    int i = 1;
+    loop:
+    if (i <= num) {
+        factorial *= i;
+        i++;
+        goto loop;
+    }
+    printf("Factorial of %d is %llu\n", num, factorial);
+    return 0;
+    error:
+    printf("Error: Factorial is not defined for negative numbers.\n");
+    return 1;
+}
+
+
+6
+
+#include <stdio.h>
+void modifyArray(int *arr, int n) {
+    for (int i = 0; i < n / 2; i++) {
+        arr[i] *= 2;
+    }
+    for (int i = n / 2; i < n; i++) {
+        *(arr + i) *= 2;
+    }
+}
+int main() {
+    int n;
+    scanf("%d", &n);
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("Original array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d", arr[i]);
+        if (i < n - 1) {
+            printf(" ");
+        }
+    }
+    printf("\n");
+    //717580
+    modifyArray(arr, n);
+    printf("Modified array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d", arr[i]);
+        if (i < n - 1) {
+            printf(" ");
+        }
+    }
+    printf("\n");
+    return 0;
+}
+
+7
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_NAME_LENGTH 100
+typedef struct {
+    char name[MAX_NAME_LENGTH];
+    int marks;
+} Student;
+float calculateAverageMarks(Student *students, int n) {
+    int totalMarks = 0;
+    for (int i = 0; i < n; i++) {
+        totalMarks += students[i].marks;
+    }
+    return (float)totalMarks / n;
+}
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n <= 0) {
+        return 1; 
+    }
+    Student *students = (Student *)malloc(n * sizeof(Student));
+    if (students == NULL) {
+        return 1; 
+    }
+    for (int i = 0; i < n; i++) {
+        scanf("%s %d", students[i].name, &students[i].marks);
+    }
+    float averageMarks = calculateAverageMarks(students, n);
+    printf("Average Marks: %.2f\n", averageMarks);
+    free(students);
+    return 0;
+}
+
+
+8
+
+#include <stdio.h>
+typedef enum {
+    SUNDAY,
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY
+} DayOfWeek;
+const char* getDayOfWeekString(DayOfWeek day) {
+    switch(day) {
+        case SUNDAY:    return "Sunday";
+        case MONDAY:    return "Monday";
+        case TUESDAY:   return "Tuesday";
+        case WEDNESDAY: return "Wednesday";
+        case THURSDAY:  return "Thursday";
+        case FRIDAY:    return "Friday";
+        case SATURDAY:  return "Saturday";
+        default:        return "Invalid";
+    }
+}
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n <= 0) {
+        printf("No days to process\n");
+        return 1;
+    }
+    int days[n]; 
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &days[i]);
+    }
+    printf("Days in reverse order:\n");
+    for (int i = n - 1; i >= 0; i--) {
+        if (days[i] >= 0 && days[i] <= 6) {
+            printf("%s", getDayOfWeekString(days[i]));
+        } else {
+            printf("Invalid");
+        }
+        if (i > 0) {
+            printf(" ");
+        }
+    }
+    printf("\n");
+    return 0;
+}
+
+
+9
+
+#include <stdio.h>
+typedef struct {
+ float real;
+ float imag;
+} Complex;
+Complex addComplex(Complex c1, Complex c2) {
+ Complex result;
+ result.real = c1.real + c2.real;
+ result.imag = c1.imag + c2.imag;
+ return result;
+}
+Complex subtractComplex(Complex c1, Complex c2) {
+ Complex result;
+ result.real = c1.real - c2.real;
+ result.imag = c1.imag - c2.imag;
+ return result;
+}
+void printComplex(Complex c, char sign) {
+ printf("%.1f %c %.1fi", c.real, sign, c.imag);
+}
+int main() {
+ Complex c1, c2, sum, difference;
+ scanf("%f %f %f %f", &c1.real, &c1.imag, &c2.real, &c2.imag);
+ sum = addComplex(c1, c2);
+ difference = subtractComplex(c1, c2);
+ printf("Addition: ");
+ printComplex(sum, '+');
+ printf("\nSubtraction: ");
+ printComplex(difference, '-');
+ return 0;
+}
+
+
+10
+
+#include <stdio.h>
+#include <string.h>
+#define MAX_NAME_LENGTH 100
+typedef struct {
+    char name[MAX_NAME_LENGTH];
+    int age;
+    float gpa;
+} Student;
+Student findHighestGPA(Student students[], int n) {
+    Student topStudent = students[0];
+    for (int i = 1; i < n; i++) {
+        if (students[i].gpa > topStudent.gpa) {
+            topStudent = students[i];
+        }
+    }
+    return topStudent;
+}
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    Student students[n]; 
+    for (int i = 0; i < n; i++) {
+        scanf("%s %d %f", students[i].name, &students[i].age, &students[i].gpa);
+    }
+    printf("All Students:\n");
+    for (int i = 0; i < n; i++) {
+        printf("Name: %s, Age: %d, GPA: %.1f\n", students[i].name, students[i].age, students[i].gpa);
+    }
+    Student topStudent = findHighestGPA(students, n);
+    printf("\nStudent with the highest GPA:\n");
+    printf("Name: %s, Age: %d, GPA: %.1f\n", topStudent.name, topStudent.age, topStudent.gpa);
+    return 0;
+}
+
+
+
+
